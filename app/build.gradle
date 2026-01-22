@@ -9,12 +9,14 @@ android {
 
     defaultConfig {
         applicationId "com.example.convertvideotomp3"
-        minSdk 21
+        minSdk 24
         targetSdk 34
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        
+        multiDexEnabled true
 
         // ✅ ABI : compatibilité maximale (IMPORTANT pour youtubedl-android)
         ndk {
@@ -31,6 +33,12 @@ android {
 
     signingConfigs {
         debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        release {
             storeFile file('debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
