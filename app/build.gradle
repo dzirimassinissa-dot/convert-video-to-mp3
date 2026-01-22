@@ -15,6 +15,18 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // ✅ ABI : compatibilité maximale (IMPORTANT pour youtubedl-android)
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+    }
+
+    // ✅ Génère UNE APK universelle (pas de split ABI)
+    splits {
+        abi {
+            enable false
+        }
     }
 
     buildTypes {
@@ -33,7 +45,7 @@ android {
         jvmTarget = '1.8'
     }
 
-    // 🔴 OBLIGATOIRE POUR COMPOSE
+    // 🔴 OBLIGATOIRE POUR JETPACK COMPOSE
     buildFeatures {
         compose true
     }
@@ -49,7 +61,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
     implementation 'androidx.activity:activity-compose:1.8.2'
 
-    // ✅ BOM À JOUR
+    // ✅ Jetpack Compose BOM (alignée)
     implementation platform('androidx.compose:compose-bom:2024.02.00')
 
     implementation 'androidx.compose.ui:ui'
@@ -68,6 +80,6 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
-    // YouTube DL Android
+    // 🎵 YouTube DL Android
     implementation 'com.github.yausername.youtubedl-android:library:0.15.0'
 }
